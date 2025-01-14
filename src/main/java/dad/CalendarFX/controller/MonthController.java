@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -175,7 +178,10 @@ public class MonthController implements Initializable {
 			throw new RuntimeException(e);
 		}
 	}
-
+    
+    public IntegerProperty monthProperty = new SimpleIntegerProperty();
+    public IntegerProperty yearProperty = new SimpleIntegerProperty();
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// bindings
@@ -184,6 +190,48 @@ public class MonthController implements Initializable {
 //		puntos.addListener((Observable, oldValue, newValue) -> actualizarImagen(newValue.intValue()));
 //		listaPuntuaciones.setItems(puntuacionesList);
 
+		monthProperty.addListener((obs, oldVal, newVal) -> {
+	        switch (newVal.intValue()) {
+	            case 1: mesLabel.setText("enero"); break;
+	            case 2: mesLabel.setText("febrero"); break;
+	            case 3: mesLabel.setText("marzo"); break;
+	            case 4: mesLabel.setText("abril"); break;
+	            case 5: mesLabel.setText("mayo"); break;
+	            case 6: mesLabel.setText("junio"); break;
+	            case 7: mesLabel.setText("julio"); break;
+	            case 8: mesLabel.setText("agosto"); break;
+	            case 9: mesLabel.setText("septiembre"); break;
+	            case 10: mesLabel.setText("octubre"); break;
+	            case 11: mesLabel.setText("noviembre"); break;
+	            case 12: mesLabel.setText("diciembre"); break;
+	            default: mesLabel.setText(""); break;
+	        }
+	    });
+		
+	}
+
+	public IntegerProperty monthProperty() {
+		return monthProperty;
+	}
+	
+	public int getMonth() {
+		return monthProperty.get();
+	}
+	
+	public void setMonth(int month) {
+		this.monthProperty.set(month);
+	}
+	
+	public IntegerProperty yearProperty() {
+		return yearProperty;
+	}
+	
+	public int getYear(int year) {
+		return yearProperty.get();
+	}
+	
+	public void setYear(int year) {
+		this.yearProperty.set(year);
 	}
 
 }
